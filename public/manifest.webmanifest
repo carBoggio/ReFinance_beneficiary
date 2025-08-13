@@ -1,0 +1,17 @@
+{
+  "name": "ReFinance - Plataforma de Financiamiento Comunitario",
+  "short_name": "ReFinance",
+  "description": "Plataforma de financiamiento comunitario para proyectos sostenibles",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+} 
