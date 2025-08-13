@@ -1,8 +1,9 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const ProjectDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [donationAmount, setDonationAmount] = useState('');
   const [showDonationForm, setShowDonationForm] = useState(false);
 
@@ -21,6 +22,7 @@ const ProjectDetail = () => {
     startDate: "2024-01-15",
     endDate: "2024-12-31",
     image: "🏫",
+    address: "campaign_address_1", // Add campaign address for Stellar integration
     
     // Tasks with completion status and progress
     tasks: [
@@ -116,6 +118,24 @@ const ProjectDetail = () => {
     ]
   };
 
+  const handleDonateNow = () => {
+    // Navigate to donate page with the selected project
+    navigate('/donate', { 
+      state: { 
+        selectedProject: {
+          id: project.id,
+          name: project.title,
+          address: project.address,
+          description: project.description,
+          goal: project.amount,
+          total_raised: project.raised,
+          supporters: 45, // Mock data
+          min_donation: 1
+        }
+      }
+    });
+  };
+
   const handleDonation = (e) => {
     e.preventDefault();
     console.log('Donation submitted:', { projectId: id, amount: donationAmount });
@@ -181,10 +201,10 @@ const ProjectDetail = () => {
 
               {/* Donate Button */}
               <button
-                onClick={() => setShowDonationForm(true)}
+                onClick={handleDonateNow}
                 className="bg-refinance-blue text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
               >
-                Donar Ahora
+                Donar con Stellar XLM
               </button>
             </div>
 
@@ -356,56 +376,6 @@ const ProjectDetail = () => {
             </div>
           </div>
         </div>
-
-        {/* Donation Modal */}
-        {showDonationForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-800">Donar al Proyecto</h2>
-                <button
-                  onClick={() => setShowDonationForm(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              
-              <form onSubmit={handleDonation} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Monto de la donación
-                  </label>
-                  <input
-                    type="number"
-                    value={donationAmount}
-                    onChange={(e) => setDonationAmount(e.target.value)}
-                    placeholder="0.00"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-refinance-blue"
-                    required
-                  />
-                </div>
-                <div className="flex justify-end gap-4 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowDonationForm(false)}
-                    className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-6 py-2 bg-refinance-blue text-white rounded-lg hover:bg-blue-600"
-                  >
-                    Donar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Projects = () => {
   const [showForm, setShowForm] = useState(false);
@@ -12,6 +12,7 @@ const Projects = () => {
     amount: '',
     category: ''
   });
+  const navigate = useNavigate();
 
   // Mock data for pending projects
   const pendingProjects = [
@@ -22,7 +23,8 @@ const Projects = () => {
       amount: "$2,500,000",
       progress: 65,
       category: "Educación",
-      image: "🏫"
+      image: "🏫",
+      address: "campaign_address_1"
     },
     {
       id: 2,
@@ -31,7 +33,8 @@ const Projects = () => {
       amount: "$1,850,000",
       progress: 40,
       category: "Salud",
-      image: "🚑"
+      image: "🚑",
+      address: "campaign_address_2"
     },
     {
       id: 3,
@@ -40,7 +43,8 @@ const Projects = () => {
       amount: "$3,200,000",
       progress: 80,
       category: "Infraestructura",
-      image: "💧"
+      image: "💧",
+      address: "campaign_address_3"
     }
   ];
 
@@ -64,6 +68,24 @@ const Projects = () => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
+    });
+  };
+
+  const handleDonate = (project) => {
+    // Navigate to donate page with the selected project
+    navigate('/donate', { 
+      state: { 
+        selectedProject: {
+          id: project.id,
+          name: project.title,
+          address: project.address,
+          description: project.description,
+          goal: 2500, // Mock goal amount
+          total_raised: project.progress * 25, // Mock raised amount
+          supporters: Math.floor(Math.random() * 100) + 20, // Mock supporters
+          min_donation: 1
+        }
+      }
     });
   };
 
@@ -205,9 +227,8 @@ const Projects = () => {
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Proyectos Pendientes</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {pendingProjects.map((project) => (
-              <Link
+              <div
                 key={project.id}
-                to={`/project/${project.id}`}
                 className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
                 <div className="text-4xl mb-4">{project.image}</div>
@@ -230,7 +251,23 @@ const Projects = () => {
                     ></div>
                   </div>
                 </div>
-              </Link>
+                
+                {/* Action Buttons */}
+                <div className="flex gap-3">
+                  <Link
+                    to={`/project/${project.id}`}
+                    className="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-center hover:bg-gray-200 transition-colors"
+                  >
+                    Ver Detalles
+                  </Link>
+                  <button
+                    onClick={() => handleDonate(project)}
+                    className="flex-1 bg-refinance-blue text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+                  >
+                    Donar
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         </div>

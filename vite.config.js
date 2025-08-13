@@ -16,6 +16,13 @@ export default defineConfig(({ command }) => {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
           skipWaiting: true,
           clientsClaim: true,
+          // Exclude development files from precaching
+          exclude: [
+            /node_modules/,
+            /vite\.svg/,
+            /favicon\.ico/,
+            /manifest\.webmanifest/
+          ],
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -46,6 +53,10 @@ export default defineConfig(({ command }) => {
               purpose: "any maskable"
             }
           ]
+        },
+        // Disable PWA in development
+        devOptions: {
+          enabled: false
         }
       })
     ].filter(Boolean),
@@ -59,6 +70,15 @@ export default defineConfig(({ command }) => {
           main: './index.html'
         }
       }
+    },
+    // Define global variables for stellar-wallets-kit compatibility
+    define: {
+      global: 'globalThis',
+      'process.env': {}
+    },
+    // Optimize dependencies for stellar-wallets-kit
+    optimizeDeps: {
+      include: ['@creit.tech/stellar-wallets-kit']
     }
   }
 })
