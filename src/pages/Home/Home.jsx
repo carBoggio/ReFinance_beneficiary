@@ -24,7 +24,7 @@ const Home = () => {
               </svg>
             </div>
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Necesito</h2>
-            <p className="text-gray-600">Solicita ayuda o agrega tu propuesta para recibir financiamiento</p>
+            <p className="text-gray-600">Solicita ayuda o agrega tu propuesta para recibir financiamiento en Argentina</p>
           </Link>
 
           <Link 
@@ -37,7 +37,7 @@ const Home = () => {
               </svg>
             </div>
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Quiero Donar</h2>
-            <p className="text-gray-600">Apoya proyectos y causas que te interesen</p>
+            <p className="text-gray-600">Apoya proyectos y causas que te interesen en Argentina</p>
           </Link>
         </div>
 

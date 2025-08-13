@@ -41,7 +41,7 @@ const Donate = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Quiero Donar</h1>
-          <p className="text-xl text-gray-600">Tu generosidad puede cambiar vidas</p>
+          <p className="text-xl text-gray-600">Tu generosidad puede cambiar vidas en Argentina</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -94,7 +94,7 @@ const Donate = () => {
             <div className="mt-8 p-6 bg-terracotta-50 rounded-xl">
               <h3 className="font-semibold text-gray-800 mb-4">Beneficios de Donar</h3>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li>• Recibo fiscal deducible de impuestos</li>
+                <li>• Recibo fiscal deducible de impuestos en Argentina</li>
                 <li>• Seguimiento del impacto de tu donación</li>
                 <li>• Participación en la comunidad ReFinance</li>
                 <li>• Notificaciones de progreso del proyecto</li>

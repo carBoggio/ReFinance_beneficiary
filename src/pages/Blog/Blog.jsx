@@ -16,8 +16,8 @@ const Blog = () => {
     },
     {
       id: 2,
-      title: "5 Razones por las que Deberías Donar a Proyectos Educativos",
-      excerpt: "Descubre cómo tu donación puede transformar la vida de cientos de niños y jóvenes que no tienen acceso a una educación de calidad.",
+      title: "5 Razones por las que Deberías Donar a Proyectos Educativos en Argentina",
+      excerpt: "Descubre cómo tu donación puede transformar la vida de cientos de niños y jóvenes que no tienen acceso a una educación de calidad en nuestro país.",
       author: "María González",
       date: "2024-08-10",
       readTime: "3 min",
@@ -37,7 +37,7 @@ const Blog = () => {
     {
       id: 4,
       title: "Historias de Éxito: Proyectos Completados Gracias a tus Donaciones",
-      excerpt: "Conoce las historias inspiradoras de proyectos que han sido exitosamente financiados y el impacto que han tenido en las comunidades.",
+      excerpt: "Conoce las historias inspiradoras de proyectos que han sido exitosamente financiados y el impacto que han tenido en las comunidades argentinas.",
       author: "Ana Rodríguez",
       date: "2024-08-05",
       readTime: "6 min",
@@ -46,8 +46,8 @@ const Blog = () => {
     },
     {
       id: 5,
-      title: "Beneficios Fiscales de las Donaciones: Lo que Necesitas Saber",
-      excerpt: "Información completa sobre cómo obtener beneficios fiscales por tus donaciones y qué documentos necesitas guardar.",
+      title: "Beneficios Fiscales de las Donaciones en Argentina: Lo que Necesitas Saber",
+      excerpt: "Información completa sobre cómo obtener beneficios fiscales por tus donaciones y qué documentos necesitas guardar según la legislación argentina.",
       author: "Lic. Roberto Silva",
       date: "2024-08-03",
       readTime: "4 min",
@@ -74,7 +74,7 @@ const Blog = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Blog ReFinance</h1>
-          <p className="text-xl text-gray-600">Aprende más sobre cómo hacer donaciones efectivas y el impacto que generan</p>
+          <p className="text-xl text-gray-600">Aprende más sobre cómo hacer donaciones efectivas y el impacto que generan en Argentina</p>
         </div>
 
         {/* Categories Filter */}
@@ -104,7 +104,7 @@ const Blog = () => {
                 <p className="text-gray-600 text-lg mb-6">{article.excerpt}</p>
                 <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
                   <span>Por {article.author}</span>
-                  <span>{new Date(article.date).toLocaleDateString('es-MX')}</span>
+                  <span>{new Date(article.date).toLocaleDateString('es-AR')}</span>
                 </div>
                 <button className="bg-refinance-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
                   Leer Artículo Completo
@@ -133,7 +133,7 @@ const Blog = () => {
               
               <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                 <span>{article.readTime} de lectura</span>
-                <span>{new Date(article.date).toLocaleDateString('es-MX')}</span>
+                <span>{new Date(article.date).toLocaleDateString('es-AR')}</span>
               </div>
               
               <div className="text-sm text-gray-500 mb-4">
@@ -152,7 +152,7 @@ const Blog = () => {
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Mantente Informado</h2>
           <p className="text-gray-600 mb-6">
             Suscríbete a nuestro boletín para recibir las últimas noticias sobre proyectos, 
-            historias de impacto y consejos para donaciones efectivas.
+            historias de impacto y consejos para donaciones efectivas en Argentina.
           </p>
           <div className="max-w-md mx-auto flex gap-3">
             <input

@@ -18,8 +18,8 @@ const Projects = () => {
     {
       id: 1,
       title: "Construcción de Escuela Rural",
-      description: "Proyecto para construir una escuela en comunidad rural de la sierra",
-      amount: "$25,000",
+      description: "Proyecto para construir una escuela en comunidad rural de la Puna",
+      amount: "$2,500,000",
       progress: 65,
       category: "Educación",
       image: "🏫"
@@ -27,8 +27,8 @@ const Projects = () => {
     {
       id: 2,
       title: "Clínica Médica Móvil",
-      description: "Unidad médica móvil para atención en comunidades remotas",
-      amount: "$18,500",
+      description: "Unidad médica móvil para atención en comunidades remotas del norte",
+      amount: "$1,850,000",
       progress: 40,
       category: "Salud",
       image: "🚑"
@@ -36,8 +36,8 @@ const Projects = () => {
     {
       id: 3,
       title: "Sistema de Agua Potable",
-      description: "Instalación de sistema de agua potable para 200 familias",
-      amount: "$32,000",
+      description: "Instalación de sistema de agua potable para 200 familias en Chaco",
+      amount: "$3,200,000",
       progress: 80,
       category: "Infraestructura",
       image: "💧"
@@ -73,7 +73,7 @@ const Projects = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Proyectos</h1>
-          <p className="text-xl text-gray-600">Descubre y apoya proyectos que cambian vidas</p>
+          <p className="text-xl text-gray-600">Descubre y apoya proyectos que cambian vidas en Argentina</p>
         </div>
 
         {/* Action Buttons */}
@@ -174,7 +174,7 @@ const Projects = () => {
                 <input
                   type="number"
                   name="amount"
-                  placeholder="Monto solicitado ($)"
+                  placeholder="Monto solicitado (ARS)"
                   value={formData.amount}
                   onChange={handleInputChange}
                   className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-refinance-blue"

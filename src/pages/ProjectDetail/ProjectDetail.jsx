@@ -6,7 +6,7 @@ const ProjectDetail = () => {
   const [donationAmount, setDonationAmount] = useState('');
   const [showDonationForm, setShowDonationForm] = useState(false);
 
-  // Mock project data - in a real app this would come from an API
+  // Mock project data with tasks and updates
   const project = {
     id: id,
     title: "Construcción de Escuela Rural",
@@ -16,39 +16,128 @@ const ProjectDetail = () => {
     raised: 16250,
     progress: 65,
     category: "Educación",
-    location: "Sierra Norte, México",
+    location: "Sierra Norte, Argentina",
     organizer: "Fundación Educación para Todos",
     startDate: "2024-01-15",
     endDate: "2024-12-31",
     image: "🏫",
-    updates: [
+    
+    // Tasks with completion status and progress
+    tasks: [
       {
-        date: "2024-08-01",
-        title: "Cimientos completados",
-        description: "Se han terminado los cimientos de la escuela. La estructura base está lista para continuar con la construcción."
+        id: 1,
+        title: "Excavación y cimientos",
+        description: "Preparación del terreno y construcción de cimientos",
+        progress: 100,
+        completed: true,
+        completionDate: "2024-07-15",
+        completionPercentage: 100
       },
       {
+        id: 2,
+        title: "Estructura principal",
+        description: "Construcción de muros y estructura de hormigón",
+        progress: 100,
+        completed: true,
+        completionDate: "2024-08-01",
+        completionPercentage: 100
+      },
+      {
+        id: 3,
+        title: "Instalación eléctrica",
+        description: "Cableado e instalación de sistemas eléctricos",
+        progress: 75,
+        completed: false,
+        completionPercentage: 75
+      },
+      {
+        id: 4,
+        title: "Instalación de agua",
+        description: "Sistema de agua potable y sanitarios",
+        progress: 60,
+        completed: false,
+        completionPercentage: 60
+      },
+      {
+        id: 5,
+        title: "Acabados interiores",
+        description: "Pintura, pisos y acabados finales",
+        progress: 0,
+        completed: false,
+        completionPercentage: 0
+      }
+    ],
+    
+    updates: [
+      {
+        id: 1,
+        date: "2024-08-01",
+        title: "Cimientos completados",
+        description: "Se han terminado los cimientos de la escuela. La estructura base está lista para continuar con la construcción.",
+        stars: 5,
+        auditors: 5,
+        nftLink: "https://opensea.io/collection/refinance-updates/1",
+        achievementPhoto: "🏗️",
+        completed: true
+      },
+      {
+        id: 2,
         date: "2024-07-15",
         title: "Materiales adquiridos",
-        description: "Se han comprado todos los materiales necesarios para la construcción. El proyecto está en marcha."
+        description: "Se han comprado todos los materiales necesarios para la construcción. El proyecto está en marcha.",
+        stars: 4.5,
+        auditors: 4,
+        nftLink: "https://opensea.io/collection/refinance-updates/2",
+        achievementPhoto: "📦",
+        completed: true
+      },
+      {
+        id: 3,
+        date: "2024-07-01",
+        title: "Estructura principal iniciada",
+        description: "Se ha comenzado con la construcción de la estructura principal del edificio.",
+        stars: 5,
+        auditors: 3,
+        nftLink: "https://opensea.io/collection/refinance-updates/3",
+        achievementPhoto: "🏢",
+        completed: true
+      },
+      {
+        id: 4,
+        date: "2024-06-15",
+        title: "Instalación eléctrica en progreso",
+        description: "Se está trabajando en la instalación del sistema eléctrico de la escuela.",
+        stars: 3.5,
+        auditors: 2,
+        nftLink: "https://opensea.io/collection/refinance-updates/4",
+        achievementPhoto: "⚡",
+        completed: false
       }
     ]
   };
 
   const handleDonation = (e) => {
     e.preventDefault();
-    // Here you would typically process the donation
     console.log('Donation submitted:', { projectId: id, amount: donationAmount });
     setShowDonationForm(false);
     setDonationAmount('');
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('es-MX', {
+    return new Intl.NumberFormat('es-AR', {
       style: 'currency',
-      currency: 'MXN'
+      currency: 'ARS'
     }).format(amount);
   };
+
+  // Calculate average stars for completed tasks
+  const completedUpdates = project.updates.filter(update => update.completed);
+  const averageStars = completedUpdates.length > 0 
+    ? (completedUpdates.reduce((sum, update) => sum + update.stars, 0) / completedUpdates.length).toFixed(1)
+    : 0;
+
+  // Calculate overall project completion percentage
+  const overallCompletion = project.tasks.reduce((sum, task) => sum + task.completionPercentage, 0) / project.tasks.length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-terracotta-50 to-terracotta-100 py-12">
@@ -73,7 +162,7 @@ const ProjectDetail = () => {
               <h1 className="text-3xl font-bold text-gray-800 mb-4">{project.title}</h1>
               <p className="text-gray-600 mb-6">{project.description}</p>
               
-              {/* Progress Bar */}
+              {/* Overall Progress Bar */}
               <div className="mb-6">
                 <div className="flex justify-between text-sm text-gray-600 mb-2">
                   <span>Recaudado: {formatCurrency(project.raised)}</span>
@@ -106,10 +195,62 @@ const ProjectDetail = () => {
                 <div className="space-y-2 text-sm">
                   <p><span className="font-medium">Ubicación:</span> {project.location}</p>
                   <p><span className="font-medium">Organizador:</span> {project.organizer}</p>
-                  <p><span className="font-medium">Inicio:</span> {new Date(project.startDate).toLocaleDateString('es-MX')}</p>
-                  <p><span className="font-medium">Finalización:</span> {new Date(project.endDate).toLocaleDateString('es-MX')}</p>
+                  <p><span className="font-medium">Inicio:</span> {new Date(project.startDate).toLocaleDateString('es-AR')}</p>
+                  <p><span className="font-medium">Finalización:</span> {new Date(project.endDate).toLocaleDateString('es-AR')}</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tasks Progress Section */}
+        <div className="bg-white rounded-2xl p-8 shadow-lg mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Progreso de Tareas</h2>
+          <div className="space-y-6">
+            {project.tasks.map((task) => (
+              <div key={task.id} className="border-l-4 border-gray-200 pl-4">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-semibold text-gray-800">{task.title}</h3>
+                  <div className="flex items-center gap-2">
+                    {task.completed ? (
+                      <span className="text-green-600 font-medium">✓ Completado</span>
+                    ) : (
+                      <span className="text-gray-500">{task.progress}%</span>
+                    )}
+                  </div>
+                </div>
+                <p className="text-gray-600 text-sm mb-3">{task.description}</p>
+                
+                {/* Task Progress Bar */}
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                  <div
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      task.completed ? 'bg-green-500' : 'bg-refinance-blue'
+                    }`}
+                    style={{ width: `${task.progress}%` }}
+                  ></div>
+                </div>
+                
+                {task.completed && (
+                  <p className="text-xs text-gray-500">
+                    Completado el {new Date(task.completionDate).toLocaleDateString('es-AR')}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+          
+          {/* Overall Completion */}
+          <div className="mt-6 p-4 bg-terracotta-50 rounded-lg">
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-gray-800">Progreso General del Proyecto</span>
+              <span className="text-lg font-bold text-refinance-blue">{overallCompletion.toFixed(1)}%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
+              <div
+                className="bg-refinance-blue h-3 rounded-full transition-all duration-300"
+                style={{ width: `${overallCompletion}%` }}
+              ></div>
             </div>
           </div>
         </div>
@@ -122,17 +263,69 @@ const ProjectDetail = () => {
               <p className="text-gray-600 leading-relaxed">{project.longDescription}</p>
             </div>
 
-            {/* Project Updates */}
+            {/* Project Updates with Stars */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Actualizaciones</h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-800">Actualizaciones</h2>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-600">Promedio:</span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-lg font-bold text-yellow-500">{averageStars}</span>
+                    <span className="text-yellow-500">⭐</span>
+                  </div>
+                </div>
+              </div>
+              
               <div className="space-y-6">
-                {project.updates.map((update, index) => (
-                  <div key={index} className="border-l-4 border-refinance-blue pl-4">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-sm text-gray-500">{new Date(update.date).toLocaleDateString('es-MX')}</span>
+                {project.updates.map((update) => (
+                  <div key={update.id} className={`border-l-4 pl-4 ${
+                    update.completed ? 'border-green-500' : 'border-gray-300'
+                  }`}>
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="text-sm text-gray-500">
+                            {new Date(update.date).toLocaleDateString('es-AR')}
+                          </span>
+                          {update.completed && (
+                            <span className="text-green-600 text-sm font-medium">✓ Completado</span>
+                          )}
+                        </div>
+                        <h3 className="font-semibold text-gray-800 mb-2">{update.title}</h3>
+                        <p className="text-gray-600 mb-3">{update.description}</p>
+                        
+                        {/* Achievement Photo */}
+                        <div className="mb-3">
+                          <div className="text-4xl">{update.achievementPhoto}</div>
+                        </div>
+                        
+                        {/* Stars and Auditors */}
+                        <div className="flex items-center gap-4 mb-3">
+                          <div className="flex items-center gap-1">
+                            <span className="text-sm text-gray-600">Calificación:</span>
+                            <div className="flex items-center gap-1">
+                              <span className="font-semibold text-yellow-500">{update.stars}</span>
+                              <span className="text-yellow-500">⭐</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <span className="text-sm text-gray-600">Auditores:</span>
+                            <span className="font-semibold text-gray-800">{update.auditors}</span>
+                          </div>
+                        </div>
+                        
+                        {/* NFT Link */}
+                        <a
+                          href={update.nftLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-refinance-blue hover:text-blue-600 text-sm font-medium"
+                        >
+                          <span>🔗</span>
+                          Ver NFT de la Actualización
+                        </a>
+                      </div>
                     </div>
-                    <h3 className="font-semibold text-gray-800 mb-2">{update.title}</h3>
-                    <p className="text-gray-600">{update.description}</p>
                   </div>
                 ))}
               </div>
